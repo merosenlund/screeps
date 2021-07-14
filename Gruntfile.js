@@ -8,8 +8,8 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		screeps: {
 			options: {
-				email:    '*****************',
-				password: '*****************',
+				email:    'merosenlund@gmail.com',
+				password: '!EVFye35xZY37PK',
 				branch:   'default',
 				ptr:      false,
 			},
@@ -25,12 +25,12 @@ module.exports = function (grunt) {
 				filter:  'isFile',
 				cwd:     'dist/',
 				src:     '**',
-				dest:    'Update This Path'
+				dest:    '/Users/mievro/Documents/ScreepsCode/screeps-starter-master'
 			},
 		},
 	});
 
-	grunt.registerTask('main', ['test', 'merge', 'write']);
+	grunt.registerTask('main', ['merge', 'write']);
 	grunt.registerTask('sandbox', ['merge', 'write-private']);
 	grunt.registerTask('merge', 'mergeFiles');
 	grunt.registerTask('write', 'screeps');
