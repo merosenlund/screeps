@@ -2,7 +2,6 @@ var harvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        console.log('test')
         if(creep.store.getFreeCapacity() > 0) {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
@@ -10,9 +9,6 @@ var harvester = {
             }
         }
         else {
-            // here is the sayHello() prototype
-            creep.sayHello();
-            
             if(creep.transfer(Game.spawns['Spawn1'], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(Game.spawns['Spawn1']);
             }

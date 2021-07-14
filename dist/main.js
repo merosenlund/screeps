@@ -112,7 +112,6 @@ var harvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        console.log('test')
         if(creep.store.getFreeCapacity() > 0) {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
@@ -120,8 +119,6 @@ var harvester = {
             }
         }
         else {
-            creep.sayHello();
-            
             if(creep.transfer(Game.spawns['Spawn1'], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(Game.spawns['Spawn1']);
             }
@@ -154,7 +151,12 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        if(creep.store[RESOURCE_ENERGY] == 0) {
+        if (creep.store.getFreeCapacity() == 0) {
+            creep.memory.upgrading = true;
+        } else if (creep.store[RESOURCE_ENERGY] == 0) {
+            creep.memory.upgrading = false;
+        }
+        if(creep.store.getFreeCapacity() > 0 && !creep.memory.upgrading) {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(sources[1]);
@@ -170,14 +172,14 @@ var roleUpgrader = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
         console.log('Upgraders: ' + upgraders.length, room.name);
 
-        if (upgraders.length < 3) {
+        if (upgraders.length < 6) {
             return true;
         }
     },
     spawnData: function(room) {
             let name = 'Upgrader' + Game.time;
             let body = [WORK, CARRY, MOVE];
-            let memory = {role: 'upgrader'};
+            let memory = {role: 'upgrader', upgrading: true};
         
             return {name, body, memory};
     }
