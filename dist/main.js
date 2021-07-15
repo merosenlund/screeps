@@ -114,6 +114,7 @@ var harvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+        creep.say("HI JAMES!!!!");
         if(creep.store.getFreeCapacity() > 0) {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
@@ -174,7 +175,7 @@ var roleUpgrader = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
         console.log('Upgraders: ' + upgraders.length, room.name);
 
-        if (upgraders.length < 6) {
+        if (upgraders.length < 5) {
             return true;
         }
     },
