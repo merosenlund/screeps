@@ -117,8 +117,8 @@ var harvester = {
     run: function(creep) {
         if(creep.store.getFreeCapacity() > 0) {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
+            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[1]);
             }
         }
         else {
@@ -139,7 +139,7 @@ var harvester = {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room.name == room.name);
         console.log('Harvesters: ' + harvesters.length, room.name);
 
-        if (harvesters.length < 2) {
+        if (harvesters.length < 1) {
             return true;
         }
     },
@@ -169,8 +169,8 @@ var roleUpgrader = {
         }
         if(creep.store.getFreeCapacity() > 0 && !creep.memory.upgrading) {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1]);
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[0]);
             }
         }
         else {
@@ -183,7 +183,7 @@ var roleUpgrader = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
         console.log('Upgraders: ' + upgraders.length, room.name);
 
-        if (upgraders.length < 4) {
+        if (upgraders.length < 3) {
             return true;
         }
     },
@@ -211,10 +211,10 @@ var roleBuilder = {
         } else if (creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.building = false;
         }
-        if(creep.store.getFreeCapacity() > 0 && !creep.memory.upgrading) {
+        if(creep.store.getFreeCapacity() > 0 && !creep.memory.building) {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1]);
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[0]);
             }
         }
         else {
@@ -230,7 +230,7 @@ var roleBuilder = {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room.name == room.name);
         console.log('Builders: ' + builders.length, room.name);
 
-        if (builders.length < 2) {
+        if (builders.length < 1) {
             return true;
         }
     },

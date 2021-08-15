@@ -7,10 +7,10 @@ var roleBuilder = {
         } else if (creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.building = false;
         }
-        if(creep.store.getFreeCapacity() > 0 && !creep.memory.upgrading) {
+        if(creep.store.getFreeCapacity() > 0 && !creep.memory.building) {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1]);
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[0]);
             }
         }
         else {
@@ -27,7 +27,7 @@ var roleBuilder = {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder' && creep.room.name == room.name);
         console.log('Builders: ' + builders.length, room.name);
 
-        if (builders.length < 2) {
+        if (builders.length < 1) {
             return true;
         }
     },

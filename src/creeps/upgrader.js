@@ -9,8 +9,8 @@ var roleUpgrader = {
         }
         if(creep.store.getFreeCapacity() > 0 && !creep.memory.upgrading) {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1]);
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[0]);
             }
         }
         else {
@@ -24,7 +24,7 @@ var roleUpgrader = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
         console.log('Upgraders: ' + upgraders.length, room.name);
 
-        if (upgraders.length < 4) {
+        if (upgraders.length < 3) {
             return true;
         }
     },
