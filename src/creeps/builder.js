@@ -2,6 +2,7 @@ var roleBuilder = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+        creep.sayHello();
         if (creep.store.getFreeCapacity() == 0) {
             creep.memory.building = true;
         } else if (creep.store[RESOURCE_ENERGY] == 0) {
@@ -19,7 +20,7 @@ var roleBuilder = {
                 if(creep.build(target) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
                 }
-            }  
+            }
         }
     },
     // checks if the room needs to spawn a creep
@@ -36,7 +37,7 @@ var roleBuilder = {
             let name = 'Builder' + Game.time;
             let body = [WORK, CARRY, MOVE];
             let memory = {role: 'builder', building: true};
-        
+
             return {name, body, memory};
     }
 };
