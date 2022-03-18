@@ -6,13 +6,19 @@ function spawnCreeps(room) {
     // lists all the creep types to console
     // _.forEach(creepTypes, type => console.log(type));
 
+    room.checkStage();
+
+    stage = room.memory.stage
+
+    console.log(room.name, " Stage: ", stage)
+
     // find a creep type that returns true for the .spawn() function
     let creepTypeNeeded = _.find(creepTypes, function(type) {
-        return creepLogic[type].spawn(room);
+        return creepLogic[type].spawn(room, stage);
     });
 
     // get the data for spawning a new creep of creepTypeNeeded
-    let creepSpawnData = creepLogic[creepTypeNeeded] && creepLogic[creepTypeNeeded].spawnData(room);
+    let creepSpawnData = creepLogic[creepTypeNeeded] && creepLogic[creepTypeNeeded].spawnData(room, stage);
     // console.log(room, JSON.stringify(creepSpawnData));
 
     if (creepSpawnData) {

@@ -11,7 +11,11 @@ Creep.prototype.checkEnergy = function decide() {
 }
 
 Creep.prototype.goHarvest = function harvest() {
-    this.say("HARVESTING!!!!");
+    var sources = this.room.find(FIND_SOURCES);
+    let target = this.pos.findClosestByPath(sources)
+    if(this.harvest(target) == ERR_NOT_IN_RANGE) {
+        this.moveTo(target);
+    }
 }
 
 Creep.prototype.goFillUp = function fillUp() {

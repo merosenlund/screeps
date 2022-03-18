@@ -13,22 +13,33 @@ var roleUpgrader = {
         }
     },
     // checks if the room needs to spawn a creep
-    spawn: function(room) {
+    spawn: function(room, stage) {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
         console.log('Upgraders: ' + upgraders.length, room.name);
 
-        if (upgraders.length < 1) {
+        if (upgraders.length < stages[stage].count) {
             return true;
         }
     },
     // returns an object with the data to spawn a new creep
-    spawnData: function(room) {
+    spawnData: function(room, stage) {
             let name = 'Upgrader' + Game.time;
-            let body = [WORK, CARRY, MOVE];
+            let body = stages[stage].body;
             let memory = {role: 'upgrader', hasEnergy: false};
         
             return {name, body, memory};
     }
 };
+
+var stages = {
+    1: {
+        body: [WORK, CARRY, MOVE],
+        count: 1,
+    },
+    2: {
+        body: [WORK, WORK, CARRY, CARRY, MOVE, MOVE],
+        count: 2,
+    }
+}
 
 module.exports = roleUpgrader;
