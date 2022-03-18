@@ -1,10 +1,10 @@
 var roleRepairer = {
 
     /** @param {Creep} creep **/
-    run: function(creep, source) {
+    run: function(creep) {
         creep.checkEnergy()
         if(creep.store.getFreeCapacity() > 0 && !creep.memory.hasEnergy) {
-            creep.goFillUp(source)
+            creep.goFillUp()
         }
         else {
             const targets = creep.room.find(FIND_STRUCTURES, {

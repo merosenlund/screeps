@@ -1,10 +1,10 @@
 var roleUpgrader = {
 
     /** @param {Creep} creep **/
-    run: function(creep, source) {
+    run: function(creep) {
         creep.checkEnergy()
         if(creep.store.getFreeCapacity() > 0 && !creep.memory.hasEnergy) {
-            creep.goFillUp(source)
+            creep.goFillUp()
         }
         else {
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
@@ -17,7 +17,7 @@ var roleUpgrader = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader' && creep.room.name == room.name);
         console.log('Upgraders: ' + upgraders.length, room.name);
 
-        if (upgraders.length < 3) {
+        if (upgraders.length < 1) {
             return true;
         }
     },

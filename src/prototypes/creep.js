@@ -14,10 +14,19 @@ Creep.prototype.goHarvest = function harvest() {
     this.say("HARVESTING!!!!");
 }
 
-Creep.prototype.goFillUp = function fillUp(source) {
-    var sources = this.room.find(FIND_SOURCES);
-    if(this.harvest(sources[source]) == ERR_NOT_IN_RANGE) {
-        this.moveTo(sources[source]);
+Creep.prototype.goFillUp = function fillUp() {
+    var energyStores = this.room.find(FIND_MY_STRUCTURES, {
+        filter: (s) => {
+            return ((
+                    s.structureType == STRUCTURE_SPAWN || 
+                    s.structureType == STRUCTURE_EXTENSION
+                ) && s.store[RESOURCE_ENERGY] >= 50
+            );
+        }
+    });
+    let target = this.pos.findClosestByRange(energyStores)
+    if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+        this.moveTo(target);
     }
 }
 

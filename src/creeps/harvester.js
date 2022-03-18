@@ -1,11 +1,13 @@
 var harvester = {
 
     /** @param {Creep} creep **/
-    run: function(creep, source) {
-        if(creep.store.getFreeCapacity() > 0) {
+    run: function(creep) {
+        creep.checkEnergy()
+        if(!creep.memory.hasEnergy) {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[source]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[source]);
+            let target = creep.pos.findClosestByPath(sources)
+            if(creep.harvest(target) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target);
             }
         }
         else {
@@ -27,7 +29,7 @@ var harvester = {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' && creep.room.name == room.name);
         console.log('Harvesters: ' + harvesters.length, room.name);
 
-        if (harvesters.length < 1) {
+        if (harvesters.length < 4) {
             return true;
         }
     },
@@ -35,7 +37,7 @@ var harvester = {
     spawnData: function(room) {
             let name = 'Harvester' + Game.time;
             let body = [WORK, CARRY, MOVE];
-            let memory = {role: 'harvester'};
+            let memory = {role: 'harvester', hasEnergy: false};
         
             return {name, body, memory};
     }
