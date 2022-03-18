@@ -8,15 +8,22 @@ module.exports.loop = function () {
     Game.myRooms = _.filter(Game.rooms, r => r.controller && r.controller.level > 0 && r.controller.my);
 
     // run spwan logic for each room in our empire
-    _.forEach(Game.myRooms, r => roomLogic.spawning(r));
+    _.forEach(Game.myRooms, (r) => {
+        roomLogic.spawning(r);
+        console.log(r.name, " Energy: ", r.energyAvailable, "/", r.energyCapacityAvailable);
+    });
     
     // run each creep role see /creeps/index.js
+    let sourceCounter = 0;
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
+        // Quick and dirty way to split the screeps between sources automatically
+        let source = sourceCounter % 2
+        sourceCounter++
 
         let role = creep.memory.role;
         if (creepLogic[role]) {
-            creepLogic[role].run(creep);
+            creepLogic[role].run(creep, source);
         }
     }
 
@@ -26,6 +33,7 @@ module.exports.loop = function () {
             delete Memory.creeps[name];
         }
     }
+    console.log(Game.cpu.bucket);
     if (Game.cpu.bucket == 10000) {
         Game.cpu.generatePixel();
     }

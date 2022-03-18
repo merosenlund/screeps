@@ -1,17 +1,10 @@
 var roleUpgrader = {
 
     /** @param {Creep} creep **/
-    run: function(creep) {
-        if (creep.store.getFreeCapacity() == 0) {
-            creep.memory.upgrading = true;
-        } else if (creep.store[RESOURCE_ENERGY] == 0) {
-            creep.memory.upgrading = false;
-        }
-        if(creep.store.getFreeCapacity() > 0 && !creep.memory.upgrading) {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
-            }
+    run: function(creep, source) {
+        creep.checkEnergy()
+        if(creep.store.getFreeCapacity() > 0 && !creep.memory.hasEnergy) {
+            creep.goFillUp(source)
         }
         else {
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
@@ -32,7 +25,7 @@ var roleUpgrader = {
     spawnData: function(room) {
             let name = 'Upgrader' + Game.time;
             let body = [WORK, CARRY, MOVE];
-            let memory = {role: 'upgrader', upgrading: true};
+            let memory = {role: 'upgrader', hasEnergy: false};
         
             return {name, body, memory};
     }

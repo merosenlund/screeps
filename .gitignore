@@ -1,0 +1,4 @@
+.screeps.json
+grunt-scripts
+node_modules
+dist

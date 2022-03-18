@@ -3,10 +3,7 @@ var harvester = {
     /** @param {Creep} creep **/
     run: function(creep, source) {
         if(creep.store.getFreeCapacity() > 0) {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[source]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[source]);
-            }
+            creep.goFillUp(source)
         }
         else {
             let storageSites = creep.room.find(FIND_STRUCTURES, {
@@ -17,8 +14,8 @@ var harvester = {
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
-            if(creep.transfer(storageSites[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(storageSites[0]);
+            if(creep.transfer(storageSites[source], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(storageSites[source]);
             }
         }
     },
