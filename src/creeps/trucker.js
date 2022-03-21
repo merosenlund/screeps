@@ -47,8 +47,8 @@ var stages = {
         count: 0,
     },
     2: {
-        body: [CARRY, CARRY, MOVE],
-        count: 5,
+        body: [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
+        count: 4,
     }
 }
 

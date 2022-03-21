@@ -7,8 +7,8 @@ Room.prototype.checkStage = function checkStage() {
    let creepCount = this.find(FIND_MY_CREEPS).length;
    // Energy capacity for the room
    let energyCount = this.energyCapacityAvailable;
-   if (creepCount === 0) {
-       this.setStage(0);
+   if (creepCount < 3) {
+       this.setStage(1);
    } else {
        stage = Math.floor(energyCount / 300)
        this.setStage(stage);

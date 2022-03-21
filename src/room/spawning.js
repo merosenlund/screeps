@@ -3,10 +3,7 @@ let creepTypes = _.keys(creepLogic);
 
 function spawnCreeps(room) {
 
-    // lists all the creep types to console
-    // _.forEach(creepTypes, type => console.log(type));
-
-    room.checkStage();
+    // room.checkStage();
 
     stage = room.memory.stage
 

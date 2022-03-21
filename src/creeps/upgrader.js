@@ -37,8 +37,8 @@ var stages = {
         count: 1,
     },
     2: {
-        body: [WORK, WORK, CARRY, CARRY, MOVE, MOVE],
-        count: 2,
+        body: [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE],
+        count: 3,
     }
 }
 

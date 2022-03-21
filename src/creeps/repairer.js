@@ -9,7 +9,11 @@ var roleRepairer = {
         else {
             const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: function(structure) {
-                    return structure.hits < structure.hitsMax && structure.structureType !== STRUCTURE_WALL
+                    return (
+                        structure.hits < structure.hitsMax && 
+                        structure.structureType !== STRUCTURE_WALL &&
+                        structure.structureType !== STRUCTURE_RAMPART
+                    )
                 }
             });
             const target = creep.pos.findClosestByRange(targets);
