@@ -12,7 +12,7 @@ module.exports.loop = function () {
         roomLogic.spawning(r);
         console.log(r.name, " Energy: ", r.energyAvailable, "/", r.energyCapacityAvailable);
     });
-    
+
     // run each creep role see /creeps/index.js
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
